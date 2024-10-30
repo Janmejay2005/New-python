@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator with PyScript</title>
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css">
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+</head>
+<body>
+    <h1>Simple Calculator</h1>
+    <input type="number" id="num1" placeholder="Enter first number" required>
+    <input type="number" id="num2" placeholder="Enter second number" required>
+    <select id="operator" required>
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+    <button id="calculate-btn">Calculate</button>
+    
+    <h2 id="result"></h2>
+    
+    <py-script>
+        def calculate(event):
+            a = int(document.getElementById('num1').value)
+            b = int(document.getElementById('num2').value)
+            operator = document.getElementById('operator').value
+            
+            if operator == '+':
+                result = a + b
+            elif operator == '-':
+                result = a - b
+            elif operator == '*':
+                result = a * b
+            elif operator == '/':
+                if b == 0:
+                    result = "Error: Division by zero"
+                else:
+                    result = a / b
+            else:
+                result = "Invalid operator"
+            
+            document.getElementById('result').innerText = f'Your answer is: {result}'
+
+        document.getElementById('calculate-btn').addEventListener('click', calculate)
+    </py-script>
+</body>
+</html>

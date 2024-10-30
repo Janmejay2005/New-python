@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+</head>
+<body>
+    <h1>Simple Calculator</h1>
+    <input id="num1" type="number" placeholder="Enter First number">
+    <input id="num2" type="number" placeholder="Enter Second number">
+    <input id="operator" type="text" placeholder="Enter operator (+, -, *, /)">
+    <button id="calculate">Calculate</button>
+    <p id="result"></p>
+
+    <py-script>
+        from pyodide import pyodide
+
+        def calculate(event):
+            a = int(pyodide.eval("document.getElementById('num1').value"))
+            b = int(pyodide.eval("document.getElementById('num2').value"))
+            operator = pyodide.eval("document.getElementById('operator').value")
+            result = ""
+
+            if operator == '+':
+                result = f"Your answer is: {a + b}"
+            elif operator == '-':
+                result = f"Your answer is: {a - b}"
+            elif operator == '*':
+                result = f"Your answer is: {a * b}"
+            elif operator == '/':
+                if b != 0:
+                    result = f"Your answer is: {a / b}"
+                else:
+                    result = "Cannot divide by zero"
+            else:
+                result = "Invalid operator"
+                
+            pyodide.eval("document.getElementById('result').innerText = '" + result + "'")
+
+        pyodide.eval("document.getElementById('calculate').addEventListener('click', calculate)")
+    </py-script>
+</body>
+</html>
