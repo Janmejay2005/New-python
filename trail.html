@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic PyScript Example with CSS</title>
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css">
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        h2 {
+            margin-top: 20px;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Welcome to PyScript!</h1>
+    <p>Enter your name:</p>
+    <input id="name-input" type="text" />
+    <button id="greet-button">Greet Me!</button>
+    
+    <h2 id="greeting"></h2>
+
+    <py-script>
+        from pyscript import Element
+
+        def greet(event):
+            name = Element("name-input").element.value
+            greeting_message = f"Hello, {name}!" if name else "Hello, Stranger!"
+            Element("greeting").element.innerHTML = greeting_message
+
+        # Bind the button click event to the greet function
+        Element("greet-button").element.onclick = greet
+    </py-script>
+
+</body>
+</html>
